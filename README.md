@@ -1,31 +1,31 @@
-# Video Encoder em Golang
+# Video Encoder in Golang
 
-Este é um projeto em Golang que consiste em um encoder de vídeo. A ideia principal é receber uma mensagem através do RabbitMQ, realizar o download de um vídeo armazenado em Cloud Storage, fragmentar o vídeo, convertê-lo para o formato MPEG-DASH, realizar o upload do vídeo convertido para o Cloud Storage novamente e, por fim, enviar uma notificação para a fila do RabbitMQ informando se o vídeo foi convertido com sucesso ou se houve algum erro.
+This is a Golang project that consists of a video encoder. The main idea is to receive a message via RabbitMQ, download a video stored in Cloud Storage, fragment the video, convert it to MPEG-DASH format, upload the converted video back to Cloud Storage, and finally, send a notification to the RabbitMQ queue informing whether the video was successfully converted or if there was any error.
 
-## Funcionamento
+## Operation
 
-1. **Recebendo mensagem do RabbitMQ**: O programa aguarda mensagens na fila do RabbitMQ. Quando uma mensagem é recebida, contendo informações sobre o vídeo a ser processado, o programa inicia o processo de conversão.
+1. **Receiving message from RabbitMQ**: The program waits for messages in the RabbitMQ queue. When a message is received, containing information about the video to be processed, the program initiates the conversion process.
 
-2. **Download do vídeo**: O vídeo especificado na mensagem é baixado do Cloud Storage para o sistema local.
+2. **Video download**: The video specified in the message is downloaded from Cloud Storage to the local system.
 
-3. **Fragmentação do vídeo**: O vídeo é fragmentado em segmentos para prepará-lo para o streaming MPEG-DASH.
+3. **Video fragmentation**: The video is fragmented into segments to prepare it for MPEG-DASH streaming.
 
-4. **Conversão para MPEG-DASH**: Os segmentos do vídeo são convertidos para o formato MPEG-DASH, otimizado para streaming.
+4. **Conversion to MPEG-DASH**: The video segments are converted to MPEG-DASH format, optimized for streaming.
 
-5. **Upload do vídeo convertido**: O vídeo convertido é enviado de volta ao Cloud Storage.
+5. **Upload of converted video**: The converted video is sent back to Cloud Storage.
 
-6. **Notificação**: Uma notificação é enviada para a fila do RabbitMQ indicando se o vídeo foi convertido com sucesso ou se houve algum erro durante o processo.
+6. **Notification**: A notification is sent to the RabbitMQ queue indicating whether the video was successfully converted or if there was any error during the process.
 
-   - Se o vídeo foi convertido com sucesso, a mensagem é marcada como concluída.
-   - Se ocorreu algum erro durante a conversão, a mensagem original é rejeitada e encaminhada diretamente para uma Dead Letter Exchange.
+   - If the video was successfully converted, the message is marked as completed.
+   - If an error occurred during conversion, the original message is rejected and forwarded directly to a Dead Letter Exchange.
 
 ## TODO
 
-- [ ] Implementar a conexão com o RabbitMQ para receber mensagens.
-- [ ] Adicionar funcionalidade para baixar vídeos do Cloud Storage.
-- [ ] Implementar a fragmentação de vídeos.
-- [ ] Converter vídeos para MPEG-DASH.
-- [ ] Adicionar funcionalidade para fazer o upload de vídeos convertidos para o Cloud Storage.
-- [ ] Enviar notificação para o RabbitMQ indicando o status da conversão.
-- [ ] Lidar com erros durante o processo de conversão.
-- [ ] Configurar Dead Letter Exchange para mensagens rejeitadas.
+- [ ] Implement RabbitMQ connection to receive messages.
+- [ ] Add functionality to download videos from Cloud Storage.
+- [ ] Implement video fragmentation.
+- [ ] Convert videos to MPEG-DASH.
+- [ ] Add functionality to upload converted videos to Cloud Storage.
+- [ ] Send notification to RabbitMQ indicating conversion status.
+- [ ] Handle errors during the conversion process.
+- [ ] Configure Dead Letter Exchange for rejected messages.
